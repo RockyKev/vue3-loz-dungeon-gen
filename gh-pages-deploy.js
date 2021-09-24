@@ -1,13 +1,17 @@
 /* eslint-disable no-console */
 const execa = require("execa");
 const fs = require("fs");
-const rmrf = require(rimraf);
+const rmrf = require("rimraf");
 
 (async () => {
   try {
     await execa("git", ["checkout", "--orphan", "gh-pages"]);
     // eslint-disable-next-line no-console
     console.log("Building started...");
+    // console.log({configFilePath})
+    // console.log({originPublicPath})
+    // console.log({fileOpts})
+
     await execa("npm", ["run", "build"]);
     // Understand if it's dist or build folder
     const folderName = fs.existsSync("dist") ? "dist" : "build";
@@ -22,7 +26,7 @@ const rmrf = require(rimraf);
     console.log(e.message);
     exitCode = 1;
   } finally {
-    await promises.writeFile(configFilePath, originPublicPath, fileOpts);
+    await fs.promises.writeFile(configFilePath, originPublicPath, fileOpts);
     await execa("git", ["checkout", "-f", "master"]);
     await execa("git", ["branch", "-D", "gh-pages"]);
     console.log("Successfully deployed, check your settings");
