@@ -1,11 +1,11 @@
 <template>
-  <div id="app">
     <div class="wrapper">
+      <h1> Dungeon Generator </h1> 
+      <button @click="generateCard(this.card1)">updateData</button>
       <Card v-bind="card1"></Card>
       <!-- <Card></Card> -->
-      <button @click="generateCard(this.card1)">updateData</button>
+      <p>Dungeon images generated with <a href="https://dungeonmapdoodler.com">https://dungeonmapdoodler.com</a></p>
     </div>
-  </div>
 </template>
 
 <script>
@@ -20,23 +20,51 @@ export default {
   data() {
     return {
       card1: {
-        dungeonName: "Swiggle",
-        description: "description",
-        kitType: "blue",
-        kitMix: "red",
-        enemies: "fire",
-        uniques: ["dog", "cat", "spiong", "thing4", "hi5"],
+        dungeonName: "A Dark Room",
+        description:
+          "A 3-room dungeon that used to be a unnatural site but is now a hole in the wall",
+        kitType: "A forest grove with a some rumbling",
+        kitMix: "Clashed with a ancient ruins with a heavy winds",
+        enemies: "beasts",
+        uniques: [
+          "Room 1: [traps] Laser traps",
+          "Room 2: [traps] Rolling rock",
+          "Room 3: [puzzles] Maze puzzle.",
+        ],
+        roomCount: 3,
       },
       dungeonNames: {
-        firstWord: [
+        adjective: [
           "narrow",
+          "compact",
+          "expansive",
+          "dense",
           "bloody",
           "smoldering",
           "desolated",
           "neverending",
           "misty",
+          "polluted",
+          "calm",
+          "bustling",
+          "abandoned",
+          "unspoiled",
+          "vibrant",
+          "lively",
+          "lonely",
+          "spoiled",
+          "bleak",
+          "dread",
+          "rundown",
+          "ugly",
+          "rancid",
+          "mystical",
+          "horrific",
+          "frozen",
+          "buried",
+          "withered",
         ],
-        secondWord: [
+        location: [
           "caverns",
           "vault",
           "lair",
@@ -45,28 +73,50 @@ export default {
           "quarters",
           "crypt",
           "tomb",
-          "burrows",
+          "barrows",
           "cells",
           "labyrinth",
           "maze",
           "delves",
+          "halls",
+          "depths",
+          "mines",
+          "cove",
+          "town",
+          "temple",
+          "shrine",
+          "prison",
+          "fortress",
+          "castle",
+          "barracks",
+          "labyrinth",
+          "pyramid",
+          "hideout",
+          "undersea cave",
+          "forest",
+          "jungle",
+          "cliff",
+          "tunnels",
+          "palace",
+          "vessel",
+          "sewer",
+          "aqueducts",
+        ],
+        addedWord: [
+          "ascension",
+          "plague",
+          "pain",
+          "sadness",
+          "last king",
+          "neverending",
+          "last empire",
+          "infernal beast",
+          "voiceless",
+          "neglected",
+          "unspoken",
         ],
       },
       dungeonDescription: {
-        roomSize: [
-          "tiny (1 room)",
-          "tiny (2 room)",
-          "tiny (3 room)",
-          "small (4 room)",
-          "small (5 room)",
-          "small (6 room)",
-          "medium (7 room)",
-          "medium (8 room)",
-          "medium (9 room)",
-          "large (10 room)",
-          "large (11 room)",
-          "large (12 room)",
-        ],
         usage: [
           "sacrifice chamber",
           "filthy prison",
@@ -75,20 +125,22 @@ export default {
           "lively space",
           "final resting place",
           "hole in the wall",
-          "place of rich resources",
+          "place of rich natural resources",
           "bustling activity",
           "quiet desolate place",
           "creepy hideout",
           "natural beauty",
-          "natural cave",
-          "taken over by humans",
-          "taken over by nature",
+          "natural landmark",
+          "manmade construct",
+          "place run over by humans",
+          "place run over by nature",
           "smoldering fire",
+          "cold wasteland",
           "dying retreat",
           "cold ashy place",
           "scene of serentity",
           "unnatural site",
-          "wasteland",
+          "barren wasteland",
         ],
       },
       dungeonKit: {
@@ -114,7 +166,15 @@ export default {
         ],
       },
       dungeonEnemies: {
-        types: ["bear", "spider", "bat"],
+        types: [
+          "animals",
+          "bandits",
+          "adventurers",
+          "nightmare",
+          "monsters",
+          "beasts",
+          "guards",
+        ],
         miniboss: [],
       },
       dungeonUniques: {
@@ -149,14 +209,36 @@ export default {
         ],
         story: [
           "Random treasure chest in the middle of a room",
-          "There's roots, bones, and ",
-          "theres a enourmous metal door",
-          "A skeleton holding a torch lies before it.",
-          "there are caskets open and empty",
-          "there are symbols all over the room",
-          "It's covered in puddles of water, dead vermin and ash.",
-          "there is an empty nest",
-          "there is a chair with a skeleton",
+          "There's roots wrapped around animal bones.",
+          "There a enourmous metal door",
+          "A lone skeleton holding a torch",
+          "Two skeletons holding each other",
+          "There's caskets open and empty",
+          "Demonic symbols line the walls",
+          "Puddles of water, dead vermin and ash.",
+          "An empty animal nest",
+          "A chair with a skeleton in the corner",
+          "A chair with a tied up skeleton in the center",
+          "A desk and chair with a skeleton",
+          "A cave-in blocking the area",
+          "A altar filled with dust",
+          "A altar, clean and unused",
+          "A altar and shrine, fresh",
+          "There is a lone seat and table",
+          "There is a lone pedestal",
+          "there is torn tapestry",
+          "There is a makeshift bed",
+          "There were many makeshift beds",
+          "There is animal droppings",
+          "A lone bandit lies there in the corner, bleeding",
+          "A pile of bodies in the corner",
+          "A bag of treasure sits in the middle",
+          "A collection of weapons in the corner",
+          "A chained skeleton to the wall",
+          "A empty treasure chest, recently pilfiered",
+          "A empty treasure chest, pilfiered many eons ago",
+          "A torch, still lit",
+          "A lone rug holding the room",
         ],
       },
     };
@@ -168,25 +250,37 @@ export default {
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     },
+    generateRoomCount: function (card) {
+      card["roomCount"] = this.diceRoll(12) + 1;
+    },
     generateDungeonName: function (card) {
       const firstWord = this.capitalizeFirstLetter(
-        this.dungeonNames.firstWord[
-          this.diceRoll(this.dungeonNames.firstWord.length)
+        this.dungeonNames.adjective[
+          this.diceRoll(this.dungeonNames.adjective.length)
         ]
       );
       const secondWord = this.capitalizeFirstLetter(
-        this.dungeonNames.secondWord[
-          this.diceRoll(this.dungeonNames.secondWord.length)
+        this.dungeonNames.location[
+          this.diceRoll(this.dungeonNames.location.length)
         ]
       );
 
-      card["dungeonName"] = `${firstWord} ${secondWord}`;
+      const thirdWord = this.capitalizeFirstLetter(
+        this.dungeonNames.addedWord[
+          this.diceRoll(this.dungeonNames.addedWord.length)
+        ]
+      );
+
+      const patterns = [
+        `${firstWord} ${secondWord}`,
+        `${firstWord} ${secondWord} of the ${thirdWord}`,
+        `${thirdWord} ${secondWord}`,
+      ];
+
+      card["dungeonName"] = patterns[this.diceRoll(patterns.length)];
     },
     generateDescription: function (card) {
-      const size =
-        this.dungeonDescription.roomSize[
-          this.diceRoll(this.dungeonDescription.roomSize.length)
-        ];
+      const size = `${card.roomCount}-room`;
       const usage1 =
         this.dungeonDescription.usage[
           this.diceRoll(this.dungeonDescription.usage.length)
@@ -214,8 +308,8 @@ export default {
         this.dungeonKit.flavor[this.diceRoll(this.dungeonKit.flavor.length)];
 
       const results = [
-        `${type} with a ${colorTint} and a ${flavor}`,
-        `${type} with a ${colorTint}`,
+        `${type} with a ${colorTint} hue and a ${flavor}`,
+        `${type} with a ${colorTint} hue`,
         `${type} with a ${flavor}`,
         `${type}`,
       ];
@@ -248,45 +342,46 @@ export default {
       // return "clash with ice";
     },
     generateEnemies: function (card) {
-      let enemyType = this.dungeonEnemies.types;
-      let enemyChoice = enemyType[this.diceRoll(enemyType.length)];
+      const enemyType = this.dungeonEnemies.types;
+      const enemyChoice1 = enemyType[this.diceRoll(enemyType.length)];
+      const enemyChoice2 = enemyType[this.diceRoll(enemyType.length)];
 
-      card["enemies"] = enemyChoice;
-      // return "bears";
-    },
+      const scenarios = [
+        `${enemyChoice1}`,
+        `${enemyChoice1} are working together with ${enemyChoice2}`,        
+        `${enemyChoice1} are enslaving ${enemyChoice2}`,                
+        `${enemyChoice1} are invading ${enemyChoice2}`,                        
+        `${enemyChoice1} are unaware of ${enemyChoice2}`,                                
+      ]
+
+      card["enemies"] = scenarios[this.diceRoll[scenarios.length]];
+
+},
     generateUniqueThing: function () {
       const thingTypeArray = Object.keys(this.dungeonUniques);
       const thingType = thingTypeArray[this.diceRoll(thingTypeArray.length)];
 
-      const thingLength = this.diceRoll(this.dungeonUniques[thingType].length)
+      const thingLength = this.diceRoll(this.dungeonUniques[thingType].length);
 
-      console.log({thingType})
-      console.log({thingLength})
-
-      const thing =
-        this.dungeonUniques[thingType][thingLength];
-      console.log("generateUniqueThing:", thing);
+      const thing = `[${thingType}] ${this.dungeonUniques[thingType][thingLength]}`;
 
       return thing;
     },
-    generateFiveUniqueThings: function (card) {
+    generateUniqueThings: function (card) {
       card["uniques"] = [];
 
-      do {
-        card["uniques"].push(this.generateUniqueThing());
-      } while (card["uniques"].length < 5);
-
-      // card["uniques"] = ["dog", "tree", "spark", "lion", "wardrobe"];
-      // return ["dog", "tree", "spark", "lion", "wardrobe"];
+      for (let count = 1; count <= card.roomCount; count++) {
+        card["uniques"].push(`Room ${count}: ${this.generateUniqueThing()}`);
+      }
     },
     generateCard: function (card) {
+      this.generateRoomCount(card);
       this.generateDungeonName(card);
       this.generateDescription(card);
       this.generateKitType(card);
       this.generateKitMix(card);
       this.generateEnemies(card);
-      this.generateFiveUniqueThings(card);
-
+      this.generateUniqueThings(card);
     },
   },
   setup() {
@@ -295,16 +390,6 @@ export default {
       console.log("Oh we mounted!");
     });
   },
-
-  // onMounted() {
-  // this.card1.dungeonName = this.generateDungeonName();
-  // this.card1.description = this.generateDescription();
-  // this.card1.kitType = this.generateKitType();
-  // this.card1.kitMix = this.generateKitMix();
-  // this.card1.description = this.generateEnemies();
-  // this.card1.uniques = this.generateFiveUniqueThings();
-  // console.log("ive loaded");
-  // },
 };
 </script>
 
@@ -318,17 +403,13 @@ body {
   margin: 0;
 }
 
-p, li {
+p,
+li {
   font-size: 1.1rem;
   line-height: 150%;
   font-weight: 300;
   margin-top: 0;
   margin-bottom: 0;
-  /* line-clamp: initial;
-  -webkit-line-clamp: initial;
-  transition-property: -webkit-line-clamp, line-clamp;
-  transition-duration: 300;
-  transition-timing-function: ease-out; */
 }
 
 .strong {
@@ -337,44 +418,11 @@ p, li {
 
 .wrapper {
   display: flex;
-  height: 100vh;
+    flex-direction: column;
   justify-content: center;
   align-items: center;
   background: #d9f2ea;
 }
 
-.card {
-  background: #fff;
-  padding: 24px;
-  border-radius: 13px;
-  position: relative;
-  max-width: 380px;
-  margin: 0 12px;
-  box-shadow: 0 10px 16px 0 #cde4dd;
-}
-.card .img-wrap {
-  padding-bottom: 85%;
-  background-image: url("https://images.unsplash.com/photo-1630236189300-f882d24be40d?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzMTY4MjU3NQ&ixlib=rb-1.2.1&q=85");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position-y: 30%;
-  margin-bottom: 1rem;
-  border-radius: 5px;
-}
 
-.card ul {
-  /* padding: 0; */
-  /* list-style-type: none; */
-}
-
-.card ul li {
-  padding-top: 4px;
-}
-
-.clamp-two {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
 </style>
