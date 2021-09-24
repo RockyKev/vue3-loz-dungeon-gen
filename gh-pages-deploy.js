@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 const execa = require("execa");
 const fs = require("fs");
+const rmrf = require(rimraf);
+
 (async () => {
   try {
     await execa("git", ["checkout", "--orphan", "gh-pages"]);
@@ -13,14 +15,17 @@ const fs = require("fs");
     await execa("git", ["--work-tree", folderName, "commit", "-m", "gh-pages"]);
     console.log("Pushing to gh-pages...");
     await execa("git", ["push", "origin", "HEAD:gh-pages", "--force"]);
-    // await execa("rm", ["-r", folderName]); FOR LINUX
-    await execa("rd", ["/s /q", folderName]);
-    await execa("git", ["checkout", "-f", "master"]);
-    await execa("git", ["branch", "-D", "gh-pages"]);
-    console.log("Successfully deployed, check your settings");
+    await rmrf(folderName, { glob: false });
+    console.log("Successfully deployed");
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log(e.message);
-    process.exit(1);
+    exitCode = 1;
+  } finally {
+    await promises.writeFile(configFilePath, originPublicPath, fileOpts);
+    await execa("git", ["checkout", "-f", "master"]);
+    await execa("git", ["branch", "-D", "gh-pages"]);
+    console.log("Successfully deployed, check your settings");
   }
+  process.exit(exitCode);
 })();
