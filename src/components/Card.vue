@@ -25,7 +25,9 @@
       class="img-wrap"
       :style="{
         backgroundImage:
-          'url(' + require('@/assets/DungeonMapDoodle' + roomCount + '.png') + ')',
+          'url(' +
+          require('@/assets/DungeonMapDoodle' + roomCount + '.png') +
+          ')',
       }"
     ></div>
   </div>

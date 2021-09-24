@@ -1,11 +1,14 @@
 <template>
-    <div class="wrapper">
-      <h1> Dungeon Generator </h1> 
-      <button @click="generateCard(this.card1)">updateData</button>
-      <Card v-bind="card1"></Card>
-      <!-- <Card></Card> -->
-      <p>Dungeon images generated with <a href="https://dungeonmapdoodler.com">https://dungeonmapdoodler.com</a></p>
-    </div>
+  <div class="wrapper">
+    <h1>Dungeon Generator</h1>
+    <button @click="generateCard(this.card1)">updateData</button>
+    <Card v-bind="card1"></Card>
+    <!-- <Card></Card> -->
+    <p>
+      Dungeon images generated with
+      <a href="https://dungeonmapdoodler.com">https://dungeonmapdoodler.com</a>
+    </p>
+  </div>
 </template>
 
 <script>
@@ -348,15 +351,14 @@ export default {
 
       const scenarios = [
         `${enemyChoice1}`,
-        `${enemyChoice1} are working together with ${enemyChoice2}`,        
-        `${enemyChoice1} are enslaving ${enemyChoice2}`,                
-        `${enemyChoice1} are invading ${enemyChoice2}`,                        
-        `${enemyChoice1} are unaware of ${enemyChoice2}`,                                
-      ]
+        `${enemyChoice1} are working together with ${enemyChoice2}`,
+        `${enemyChoice1} are enslaving ${enemyChoice2}`,
+        `${enemyChoice1} are invading ${enemyChoice2}`,
+        `${enemyChoice1} are unaware of ${enemyChoice2}`,
+      ];
 
       card["enemies"] = scenarios[this.diceRoll[scenarios.length]];
-
-},
+    },
     generateUniqueThing: function () {
       const thingTypeArray = Object.keys(this.dungeonUniques);
       const thingType = thingTypeArray[this.diceRoll(thingTypeArray.length)];
@@ -418,11 +420,9 @@ li {
 
 .wrapper {
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: #d9f2ea;
 }
-
-
 </style>

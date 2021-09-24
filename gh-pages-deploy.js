@@ -1,7 +1,11 @@
+// Via https://dev.to/rolanddoda/deploy-to-github-pages-like-a-pro-with-github-actions-4hdg
+
 /* eslint-disable no-console */
 const execa = require("execa");
 const fs = require("fs");
 const rmrf = require("rimraf");
+
+let exitCode = 0;
 
 (async () => {
   try {
@@ -20,7 +24,7 @@ const rmrf = require("rimraf");
     console.log("Pushing to gh-pages...");
     await execa("git", ["push", "origin", "HEAD:gh-pages", "--force"]);
     await rmrf(folderName, { glob: false }, () => {
-      console.log("Deleted build folder" + folderName)
+      console.log("Deleted build folder " + folderName);
     });
     console.log("Successfully deployed");
   } catch (e) {
@@ -33,5 +37,6 @@ const rmrf = require("rimraf");
     await execa("git", ["branch", "-D", "gh-pages"]);
     console.log("Successfully deployed, check your settings");
   }
+
   process.exit(exitCode);
 })();

@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: '/vue3-loz-dungeon-gen/'
-}
+  publicPath: "/vue3-loz-dungeon-gen/",
+};
